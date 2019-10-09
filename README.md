@@ -9,5 +9,3 @@ To run:
 
 - ipfs based flushing to local storage.
 - ipns shared FS cross device.
-- monotonic conflict resolution.
-- Diffie Hellman PK encryption for sharing.
