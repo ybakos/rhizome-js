@@ -14,29 +14,32 @@ const init = async (ipfs, cache)=> {
   return {ipfsNode, fileTable};
 };
 
+const cacheCheck = (path, hash, fileTable)=> {
+  const matches = (hash === fileTable.get(path));
+  return matches;
+}
+
 const fileUpdate = async(ipfsNode, rootDirHash, fileTable) =>{
   // if (ipnsHashLock === true) return;
   const files = await ipfsNode.ls(rootDirHash);
-  
-  // fileTable check to prevent rewriting unchanged files.
 
   const updatedFiles = files.map(async(file) => {
 
     if (file.type === 'dir') {
       //check fileTable first
-      await fileUpdate(ipfsNode, file.path);
+      await fileUpdate(ipfsNode, file.path, fileTable);
     }
-    if (file.type === 'file' && file.name !== 'index.js') {
-      //check fileTable
+    if (file.type === 'file') {
+      
       let fileHashPath = file.path.split('/');
-      let data = await ipfsNode.get(file.path);
-
       fileHashPath.shift();
-      const filePath = fileHashPath.join('/');
+      const filePath = '/' + fileHashPath.join('/');
+      //check fileTable
+      if (cacheCheck(filePath, file.hash, fileTable)) return;
 
-
+      let data = await ipfsNode.get(file.path); 
       data = data[0].content.toString();
-      fs.writeFile(`/${filePath}`, data ,(err) => {if (err) throw err;});
+      fs.writeFile(filePath, data ,(err) => {if (err) throw err;});
     }
   });
 
@@ -61,20 +64,19 @@ const watch = (directory, ipfsNode, fileTable) => {
     await ipfsNode.files.write(privatePath + path, path, { create: true, parents: true });
     const { hash } = await ipfsNode.files.stat(privatePath + path); 
     //add to cache
-    await fileTable.set(path, hash)
+    await fileTable.set(path, hash);
   })
   .on('change', async(path) => {
     await ipfsNode.files.write(privatePath + path, path, { create: true, parents: true });
     const { hash } = await ipfsNode.files.stat(privatePath + path);
     //update cache
-    await fileTable.set(path, hash)
+    await fileTable.set(path, hash);
   })
   .on('unlink', async(path) => {
     try {
       await ipfsNode.files.rm(privatePath + path, { recursive: true });
-      const { hash } = await ipfsNode.files.stat(privatePath + path);
       //remove from cache
-      await fileTable.del(hash); 
+      await fileTable.del(path); 
     } catch (error) {
         console.log(error, "oops")
     }
@@ -93,12 +95,11 @@ const main = async (config = {}) => {
   } = await init(ipfs, NodeCache, config.ipfsSettings);
 
   await fsHeartbeat(ipfsNode, fileTable);
-  watch(cwd, ipfsNode, fileTable);
+  watch(cwd + '/dev', ipfsNode, fileTable);
 
   //put into a worker
   await setInterval(async() => {
-    console.log(fileTable)
-    await fsHeartbeat(ipfsNode);
+    await fsHeartbeat(ipfsNode, fileTable);
   }, config.interval|| 5000);
 }
 
