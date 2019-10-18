@@ -1,0 +1,21 @@
+{
+  "name": "filesystemprototype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "chokidar": "^3.2.1",
+    "ipfs-http-client": "^38.0.0",
+    "node-cache": "^4.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "author": "",
+  "license": "ISC"
+}
