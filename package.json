@@ -18,7 +18,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "mocha test/",
-    "start": "npm install ipfs --global && ipfs init && ipfs daemon && node dev/invoke"
+    "start": "DOCKER=true node dev/invoke"
   },
   "author": "",
   "license": "ISC"
