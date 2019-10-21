@@ -1,6 +1,6 @@
-const index = require('../index');
+const { privateDirectory, publicDirectory } = require('../index');
 
-index().then((res)=>{
+publicDirectory().then((res)=>{
   console.log(res);
 
 }).catch((err) => {
