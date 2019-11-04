@@ -8,6 +8,7 @@
     "test": "test"
   },
   "dependencies": {
+    "blessed": "^0.1.81",
     "chokidar": "^3.2.1",
     "ipfs-http-client": "^38.0.0",
     "is-ipfs": "^0.6.1",
