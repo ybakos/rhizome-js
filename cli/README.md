@@ -1,4 +1,4 @@
-bakOsFs
+rhizome cli
 =======
 
 Cli to interact with global balloons of information
