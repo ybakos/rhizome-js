@@ -16,7 +16,7 @@ Install Node 11+ then set NVM to use it:
 
 Clone the repo
 
-`git clone git@github.com:scmilee/Rhizome.git`
+`git clone git@github.com:scmilee/rhizome.git`
 
 
 **IPFS is required since the dameon-ctl tool creates new keys each run.**
