@@ -1,48 +1,44 @@
 # Rhizome
 
-**To run from scratch:** 
+A proof-of-concept for a new information-centric operating system for humans.
 
-Install NVM
+## Installation
 
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash`
+First, ensure that all dependencies are met.
+
+### IPFS
+
+TODO: Why? What is ipfs for? Why is it a dependency?
+
+Install [ipfs](https://docs.ipfs.io/guides/guides/install).
+Create your ipfs keys: `ipfs init`.
+Start the ipfs daemon: `ipfs daemon`.
+
+### Nodejs
+
+The main user interface is written in JavaScript. Install [nodejs](https://nodejs.org/en/).
+
+Next, clone this repository.
+
+Install the package dependencies: `npm install`
+
+Run the text-based user interface: `npm run tui`
+
+## Development
+
+TODO
+
+## Testing
+
+TODO
+
+&copy; 2019 Dylan Drudge and Yong Bakos. All rights reserved.
 
 
-Install Node 11+ then set NVM to use it:
+---
 
-`nvm install 11`
-
-`nvm use 11`
-
-
-Clone the repo
-
-`git clone git@github.com:scmilee/Rhizome.git`
-
+## Old notes
 
 **IPFS is required since the dameon-ctl tool creates new keys each run.**
+TODO ^ what does that mean?
 
-
-Visit: https://docs.ipfs.io/guides/guides/install/
-
-
-Once installed and working, run the following commands:
-
-
-Create your keys.
-
-`ipfs init`
-
-
-Start the daemon.
-
-`ipfs daemon`
-
-
-Install the packages for the project.
-
-`npm install`
-
-
-Run the dev TUI
-
-`npm run tui`
