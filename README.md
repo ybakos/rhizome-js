@@ -18,7 +18,7 @@ Start the ipfs daemon: `ipfs daemon`.
 
 The main user interface is written in JavaScript. Install [nodejs](https://nodejs.org/en/).
 
-Next, clone this repository.
+Next, clone this repository. `git clone git@github.com:scmilee/rhizome.git`
 
 Install the package dependencies: `npm install`
 
