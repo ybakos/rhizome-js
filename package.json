@@ -21,7 +21,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "mocha test/",
-    "tui": "node bin/tui",
+    "tui": "node bin/run_tui",
     "start": "DOCKER=true node bin/invoke"
   },
   "author": "",
