@@ -21,8 +21,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "mocha test/",
-    "tui": "node dev/tui",
-    "start": "DOCKER=true node dev/invoke"
+    "tui": "node bin/tui",
+    "start": "DOCKER=true node bin/invoke"
   },
   "author": "",
   "license": "ISC"
