@@ -1,7 +1,7 @@
 {
-  "name": "filesystemprototype",
+  "name": "rhizome",
   "version": "1.0.0",
-  "description": "",
+  "description": "library to interact with global balloons of information",
   "main": "index.js",
   "directories": {
     "lib": "lib",
@@ -11,11 +11,10 @@
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.18",
     "chokidar": "^3.2.1",
-    "ipfs-http-client": "^38.0.0",
+    "go-ipfs-dep": "^0.4.22",
+    "ipfsd-ctl": "^0.47.4",
     "is-ipfs": "^0.6.1",
     "lodash": "^4.17.15",
-    "neo-blessed": "^0.2.0",
-    "node-cache": "^4.2.1",
     "redis": "^2.8.0"
   },
   "devDependencies": {},
@@ -24,6 +23,6 @@
     "tui": "node bin/run_tui",
     "start": "DOCKER=true node bin/invoke"
   },
-  "author": "",
+  "author": "scmilee",
   "license": "ISC"
 }
