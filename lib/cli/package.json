@@ -1,12 +1,12 @@
 {
-  "name": "bak-os-cli",
+  "name": "rhizome-cli",
   "description": "Cli to interact with global balloons of information",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Dylan Drudge @scmilee",
   "bin": {
     "bakOsFs": "./bin/run"
   },
-  "bugs": "https://github.com/scmilee/filesystemprototype/bakOsFs/issues",
+  "bugs": "https://github.com/scmilee/rhizome/lib/cli/issues",
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
@@ -31,7 +31,7 @@
     "/oclif.manifest.json",
     "/src"
   ],
-  "homepage": "https://github.com/scmilee/filesystemprototype/bakOsFs",
+  "homepage": "https://github.com/scmilee/rhizome/bakOsFs",
   "keywords": [
     "oclif"
   ],
@@ -44,7 +44,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "scmilee/filesystemprototype/bakOsFs",
+  "repository": "scmilee/rhizome/lib/cli",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint .",

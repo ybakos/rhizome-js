@@ -1,6 +1,6 @@
-// const privateDirectory = require('./lib/privateDirectory');
-// const publicDirectory = require('./lib/publicDirectory');
-const PublicFileManager = require('./lib/PublicFileManager');
-const tui = require('./lib/tui');
+/*
+  rhizome core library export
+*/
+const PublicFileManager = require('./lib/shared/PublicFileManager');
 
-module.exports = { PublicFileManager, tui };
+module.exports = { PublicFileManager };
