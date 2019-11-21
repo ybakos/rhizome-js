@@ -19,11 +19,10 @@ const tui = require('../lib/tui/tui');
   }
   //spawn a non-disposable(deterministic key generation from init file) daemon
   const ipfsd = await ipfsFactory.spawn({init: init, disposable: false , start: true});
-  ipfs = ipfsd.api;   
+  ipfs = ipfsd.api;
   const redis = Redis.createClient({host: 'sprightly-redwood-7a63d23fa9.redisgreen.net', port:11042, password: 'a4f74e5842c24c8db40013fc20ab8200'});
-  
+
   const PFM = await new PublicFileManager(ipfs,redis);
-  
+
   tui(PFM);
-}
-)();
+})();
