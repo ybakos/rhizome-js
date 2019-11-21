@@ -17,9 +17,13 @@
     "lodash": "^4.17.15",
     "redis": "^2.8.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
   "scripts": {
-    "test": "mocha test/",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --colors",
     "tui": "node bin/run_tui",
     "start": "DOCKER=true node bin/invoke"
   },
