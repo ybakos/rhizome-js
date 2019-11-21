@@ -3,7 +3,7 @@ const os = require('os');
 const Redis = require('redis');
 const IPFSDaemonFactory = require('ipfsd-ctl');
 const { PublicFileManager } = require('../index');
-const tui = require('../lib/tui/tui');
+const tui = require('../tui/tui');
 
 (async()=>{
   //this is for dynamic spawning of a ipfs daemon
@@ -12,8 +12,8 @@ const tui = require('../lib/tui/tui');
   let init;
   //if the ipfs init file exists, don't init the daemon and visa versa
   try {
-   fs.statSync(`${homedir}/.ipfs`);
-   init = false;
+    fs.statSync(`${homedir}/.ipfs`);
+    init = false;
   } catch (error) {
     init = true;
   }
