@@ -18,6 +18,6 @@ Run the text-based user interface: `npm run tui`
 
 ## Testing
 
-TODO
+This project uses [jest](https://jestjs.io). Run via `npm test`, and see _package.json_ for other commands.
 
 &copy; 2019 Dylan Drudge and Yong Bakos. All rights reserved.
