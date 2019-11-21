@@ -24,7 +24,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
-    "tui": "node bin/run_tui",
+    "tui": "node bin/tui",
     "start": "DOCKER=true node bin/invoke"
   },
   "author": "scmilee",
