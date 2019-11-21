@@ -1,4 +1,4 @@
-FROM node:10.15.1   
+FROM node:10.15.1
 RUN apt-get update
 RUN apt-get install golang-go -y
 RUN wget https://dist.ipfs.io/go-ipfs/v0.4.10/go-ipfs_v0.4.10_linux-386.tar.gz
@@ -15,4 +15,4 @@ RUN npm install --save ipfs
 RUN npm i go-ipfs-dep
 RUN npm install
 COPY . .
-CMD [ "npm", "start" ] 
+CMD [ "npm", "start" ]
