@@ -1,11 +1,11 @@
 {
   "name": "rhizome",
-  "version": "1.0.0",
-  "description": "library to interact with global balloons of information",
+  "version": "0.0.1",
+  "repository": "https://github.com/scmilee/rhizome",
+  "description": "Reference implementation of Rhizome, a platform for information-centric shells",
   "main": "index.js",
   "directories": {
-    "lib": "lib",
-    "test": "test"
+    "lib": "lib"
   },
   "dependencies": {
     "blessed": "^0.1.81",
@@ -28,5 +28,8 @@
     "start": "DOCKER=true node bin/invoke"
   },
   "author": "scmilee",
+  "contributors": [
+    "ybakos"
+  ],
   "license": "ISC"
 }
