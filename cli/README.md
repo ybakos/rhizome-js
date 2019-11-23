@@ -1,15 +1,19 @@
-rhizome cli
-=======
+# Rhizome CLI
 
-Cli to interact with global balloons of information
+A command-line interface for Rhizome, an information-centric shell.
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/bakOsFs.svg)](https://npmjs.org/package/bakOsFs)
-[![Downloads/week](https://img.shields.io/npm/dw/bakOsFs.svg)](https://npmjs.org/package/bakOsFs)
-[![License](https://img.shields.io/npm/l/bakOsFs.svg)](https://github.com/scmilee/filesystemprototype/bakOsFs/blob/master/package.json)
+## Installation & Running
 
-<!-- toc -->
-# Usage
-<!-- usage -->
-# Commands
-<!-- commands -->
+The main user interface is written in JavaScript. Install [nodejs](https://nodejs.org/en/).
+
+Next, clone this repository.
+
+Install the package dependencies: `npm install`
+
+Run the text-based user interface: `TODO`
+
+## Testing
+
+This project uses [jest](https://jestjs.io). Run via `npm test`, and see _package.json_ for other commands.
+
+&copy; 2019 Dylan Drudge and Yong Bakos. All rights reserved.
