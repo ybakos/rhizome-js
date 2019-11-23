@@ -1,6 +1,6 @@
-# Rhizome CLI
+# Rhizome TUI
 
-A command-line interface for Rhizome, an information-centric shell.
+A text user interface (TUI) for Rhizome, an information-centric shell.
 
 ## Installation & Running
 
@@ -10,7 +10,7 @@ Next, clone this repository.
 
 Install the package dependencies: `npm install`
 
-Run the text-based user interface: `TODO`
+Run the text-based user interface: `npm run tui`
 
 ## Testing
 
