@@ -1,4 +1,4 @@
 const Continuum = require('../lib/continuum')
-test('A thing exists', () => {
+test('The continuum exists', () => {
   const continuum = new Continuum()
 })
