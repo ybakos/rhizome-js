@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const Redis = require('redis');
 const IPFSDaemonFactory = require('ipfsd-ctl');
-const { PublicFileManager } = require('../index');
+const { Rhizome } = require('../index');
 const tui = require('../tui/tui');
 
 (async () => {
@@ -18,5 +18,5 @@ const tui = require('../tui/tui');
     port:11042,
     password: 'a4f74e5842c24c8db40013fc20ab8200'
   })
-  tui(await new PublicFileManager(ipfsDaemon.api, redisClient));
+  tui(await new Rhizome(ipfsDaemon.api, redisClient));
 })();

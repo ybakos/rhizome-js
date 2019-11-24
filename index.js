@@ -1,6 +1,6 @@
 /*
   rhizome core library export
 */
-const PublicFileManager = require('./lib/shared/PublicFileManager');
+const Rhizome = require('./lib/Rhizome');
 
-module.exports = { PublicFileManager };
+module.exports = { Rhizome };
