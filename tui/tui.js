@@ -2,7 +2,7 @@ const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 const _ = require('lodash');
 
-const tui = (PFM) => {
+const tui = (rhizome) => {
 
   const screen = blessed.screen({
     autoPadding: true,
@@ -11,12 +11,12 @@ const tui = (PFM) => {
   //create layout and widgets
   const grid = new contrib.grid({rows: 1, cols: 2, screen: screen})
 
-  createEntryTree(grid, screen, PFM);
+  createEntryTree(grid, screen, rhizome);
   screen.render()
 
 }
 
-const taggedTable = (grid,screen,data,pfm, tag) => {
+const taggedTable = (grid,screen,data,rhizome, tag) => {
   const list = grid.set(0, 1, 1, 1, blessed.list,
     { keys: true
     , fg: 'green'
@@ -48,7 +48,7 @@ const taggedTable = (grid,screen,data,pfm, tag) => {
   list.setItems(data);
 
   list.on('select',async(data)=> {
-    const message = await pfm.read(data.content);
+    const message = await rhizome.read(data.content);
     textbox.setText(message);
     list.focus();
     screen.render();
@@ -56,7 +56,7 @@ const taggedTable = (grid,screen,data,pfm, tag) => {
 
 }
 
-const createEntryTree = (grid, screen, PFM) => {
+const createEntryTree = (grid, screen, rhizome) => {
   const tree =  grid.set(0, 0, 1, 1, contrib.tree,
     { style: { text: "red" }
     , template: { lines: true }
@@ -70,10 +70,10 @@ const createEntryTree = (grid, screen, PFM) => {
     // Child generation function
     , children: {
         "Create": {
-          function: async()=> {return createShareForm(screen, grid, PFM) }
+          function: async()=> {return createShareForm(screen, grid, rhizome) }
         },
         "Explore": {
-          function: async()=> {return createExploreForm(screen, grid, PFM)}
+          function: async()=> {return createExploreForm(screen, grid, rhizome)}
         }
       }
   }
@@ -93,7 +93,7 @@ const createEntryTree = (grid, screen, PFM) => {
   tree.focus()
 }
 
-const createShareForm = (screen,grid,pfm) => {
+const createShareForm = (screen,grid,rhizome) => {
   const form = grid.set(0, 0, 1, 1, blessed.form,
   { keys: true
   , fg: 'green'
@@ -216,16 +216,16 @@ const createShareForm = (screen,grid,pfm) => {
   });
 
   cancel.on('press', function() {
-    createEntryTree(grid,screen,pfm);
+    createEntryTree(grid,screen,rhizome);
     screen.render();
   });
 
   form.on('submit', async(data)=> {
 
-    const contentHash = await pfm.upload(data.Text);
+    const contentHash = await rhizome.upload(data.Text);
     const tags = _.split(data.Tags, ',');
     _.forEach(tags, async tag => {
-      await pfm.link(contentHash, tag);
+      await rhizome.link(contentHash, tag);
     });
 
     form.setContent('Submitted.');
@@ -239,7 +239,7 @@ const createShareForm = (screen,grid,pfm) => {
 }
 
 // form for exploring content, should only return a input for tags and return all message linked with that tag
-const createExploreForm = (screen,grid,pfm) => {
+const createExploreForm = (screen,grid,rhizome) => {
   const form = grid.set(0, 0, 1, 1, blessed.form,
   { keys: true
   , fg: 'green'
@@ -331,20 +331,20 @@ const createExploreForm = (screen,grid,pfm) => {
   });
 
   cancel.on('press', function() {
-    createEntryTree(grid,screen, pfm);
+    createEntryTree(grid,screen, rhizome);
     screen.render();
   });
 
   form.on('submit', async(data)=> {
     let tag = data.Tag;
-    let taggedHashes = await pfm.retrieveLinks(tag);
+    let taggedHashes = await rhizome.retrieveLinks(tag);
     if (tag === '') tag = 'Created by you.';
 
     if (taggedHashes === false) {
       taggedHashes = 'No hashes found under that tag.'
       form.setContent(taggedHashes.toString());
     }else {
-      taggedTable( grid, screen , taggedHashes, pfm, tag);
+      taggedTable( grid, screen , taggedHashes, rhizome, tag);
     }
 
     // screen.render();
