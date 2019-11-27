@@ -6,6 +6,7 @@ test('The continuum exists', () => {
 
 test('The continuum represents an infinite set of Things', () => {
   const c = new Continuum([])
+  expect(c).toHaveProperty('things')
 })
 
 test('Storing information in the continuum returns a Thing with a URI', () => {
@@ -19,5 +20,5 @@ test('Storing information in the continuum returns a Thing with a URI', () => {
 test('You retrieve a thing via its uri', () => {
   const c = new Continuum()
   thing = c.store('fake')
-  expect(c.get(thing.uri)).toBe(thing)
+  expect(c.retrieve(thing.uri)).toBe(thing)
 })
