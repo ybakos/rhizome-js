@@ -3,26 +3,22 @@ const contrib = require('blessed-contrib');
 const _ = require('lodash');
 
 const tui = (rhizome) => {
-
   const screen = blessed.screen({
     autoPadding: true,
     smartCSR: true
   });
   //create layout and widgets
   const grid = new contrib.grid({rows: 1, cols: 2, screen: screen})
-
   createEntryTree(grid, screen, rhizome);
   screen.render()
-
 }
 
-const taggedTable = (grid,screen,data,rhizome, tag) => {
+const taggedTable = (grid, screen, data, rhizome, tag) => {
   const list = grid.set(0, 1, 1, 1, blessed.list,
     { keys: true
     , fg: 'green'
     , label: `Hashes tagged: ${tag}`
     , columnWidth: [24, 10, 10]})
-
   const textbox = blessed.textarea({
     parent: list,
     name: 'Details',
@@ -47,7 +43,7 @@ const taggedTable = (grid,screen,data,rhizome, tag) => {
   list.focus();
   list.setItems(data);
 
-  list.on('select',async(data)=> {
+  list.on('select', async (data) => {
     const message = await rhizome.read(data.content);
     textbox.setText(message);
     list.focus();
@@ -70,10 +66,10 @@ const createEntryTree = (grid, screen, rhizome) => {
     // Child generation function
     , children: {
         "Create": {
-          function: async()=> {return createShareForm(screen, grid, rhizome) }
+          function: async () => createShareForm(screen, grid, rhizome)
         },
         "Explore": {
-          function: async()=> {return createExploreForm(screen, grid, rhizome)}
+          function: async () => createExploreForm(screen, grid, rhizome)
         }
       }
   }
@@ -82,18 +78,18 @@ const createEntryTree = (grid, screen, rhizome) => {
 
   // Handling select event. Every custom property that was added to node is
   // available like the "node.getPath" defined above
-  tree.on('select', async(node)=>{
+  tree.on('select', async (node) => {
     await node.function();
   });
 
-  screen.key(['escape', 'q', 'C-c'], function(ch, key) {
+  screen.key(['escape', 'q', 'C-c'], (ch, key) => {
     return process.exit(0);
   });
 
   tree.focus()
 }
 
-const createShareForm = (screen,grid,rhizome) => {
+const createShareForm = (screen, grid, rhizome) => {
   const form = grid.set(0, 0, 1, 1, blessed.form,
   { keys: true
   , fg: 'green'
@@ -119,6 +115,7 @@ const createShareForm = (screen,grid,rhizome) => {
       }
     }
   });
+
   const textInputLabel = blessed.text({
     parent: form,
     top: 3,
@@ -203,11 +200,11 @@ const createShareForm = (screen,grid,rhizome) => {
     }
   });
 
-  textInput.on('press', ()=>{
+  textInput.on('press', () => {
     textInput.focus();
   });
 
-  tagInput.on('press', ()=>{
+  tagInput.on('press', () => {
     tagInput.focus();
   });
 
@@ -216,30 +213,26 @@ const createShareForm = (screen,grid,rhizome) => {
   });
 
   cancel.on('press', function() {
-    createEntryTree(grid,screen,rhizome);
+    createEntryTree(grid, screen, rhizome);
     screen.render();
   });
 
-  form.on('submit', async(data)=> {
-
+  form.on('submit', async (data) => {
     const contentHash = await rhizome.upload(data.Text);
     const tags = _.split(data.Tags, ',');
     _.forEach(tags, async tag => {
       await rhizome.link(contentHash, tag);
     });
-
     form.setContent('Submitted.');
-
     screen.render();
   });
-
   textInput.focus();
   screen.render();
   return form;
 }
 
 // form for exploring content, should only return a input for tags and return all message linked with that tag
-const createExploreForm = (screen,grid,rhizome) => {
+const createExploreForm = (screen, grid, rhizome) => {
   const form = grid.set(0, 0, 1, 1, blessed.form,
   { keys: true
   , fg: 'green'
@@ -323,19 +316,20 @@ const createExploreForm = (screen,grid,rhizome) => {
     }
   });
 
-  tagInput.on('press', ()=>{
+  tagInput.on('press', () => {
     tagInput.focus();
   })
+
   submit.on('press', function() {
     form.submit();
   });
 
   cancel.on('press', function() {
-    createEntryTree(grid,screen, rhizome);
+    createEntryTree(grid, screen, rhizome);
     screen.render();
   });
 
-  form.on('submit', async(data)=> {
+  form.on('submit', async (data) => {
     let tag = data.Tag;
     let taggedHashes = await rhizome.retrieveLinks(tag);
     if (tag === '') tag = 'Created by you.';
@@ -344,7 +338,7 @@ const createExploreForm = (screen,grid,rhizome) => {
       taggedHashes = 'No hashes found under that tag.'
       form.setContent(taggedHashes.toString());
     }else {
-      taggedTable( grid, screen , taggedHashes, rhizome, tag);
+      taggedTable(grid, screen, taggedHashes, rhizome, tag);
     }
 
     // screen.render();
