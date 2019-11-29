@@ -15,7 +15,7 @@ const tui = require('../tui/tui');
   });
   const redisClient = Redis.createClient({
     host: 'sprightly-redwood-7a63d23fa9.redisgreen.net',
-    port:11042,
+    port: 11042,
     password: 'a4f74e5842c24c8db40013fc20ab8200'
   })
   tui(await new Rhizome(ipfsDaemon.api, redisClient));
