@@ -3,7 +3,7 @@ const os = require('os');
 const Redis = require('redis');
 const IPFSDaemonFactory = require('ipfsd-ctl');
 const { Rhizome } = require('../index');
-const tui = require('../tui/tui');
+const Tui = require('../tui/tui');
 
 (async () => {
   // Spawn a non-disposable (deterministic key generation from init
@@ -15,8 +15,8 @@ const tui = require('../tui/tui');
   });
   const redisClient = Redis.createClient({
     host: 'sprightly-redwood-7a63d23fa9.redisgreen.net',
-    port:11042,
+    port: 11042,
     password: 'a4f74e5842c24c8db40013fc20ab8200'
   })
-  tui(await new Rhizome(ipfsDaemon.api, redisClient));
+  new Tui(await new Rhizome(ipfsDaemon.api, redisClient)).render();
 })();

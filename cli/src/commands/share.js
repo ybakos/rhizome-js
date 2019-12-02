@@ -1,13 +1,13 @@
 const { Command, flags } = require('@oclif/command');
-const PFMCreator = require('../../../dev/invoke');
+const PFMCreator = require('../../../bin/invoke');
 
-const getInput = async(question) => {
+const getInput = async (question) => {
   const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
   });
-  return new Promise((reject, resolve)=> {
-    readline.question(question ,async(input) => {
+  return new Promise((reject, resolve) => {
+    readline.question(question, async (input) => {
       readline.close();
       resolve(input);
     });
