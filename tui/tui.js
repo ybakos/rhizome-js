@@ -12,7 +12,8 @@ class Tui {
     this.screen = blessed.screen(SCREEN_CONFIG)
     this.screen.key(QUIT_KEYS, (ch, key) => process.exit(0))
     this.grid = new contrib.grid({rows: 1, cols: 2, screen: this.screen})
-    this.createEntryTree()
+    this.menuBar = this._menuBar()
+    this.screen.append(this.menuBar)
   }
 
   render() {
@@ -331,6 +332,43 @@ class Tui {
     tagInput.focus();
     this.render();
     return form;
+  }
+
+  _menuBar() {
+    return blessed.listbar({
+      commands: [
+        {
+          text: 'Create',
+          callback: () => this.createShareForm()
+        },
+        {
+          text: 'Explore',
+          callback: () => this.createExploreForm()
+        },
+        {
+          text: 'TODO',
+          callback: () => console.log('TODO')
+        },
+        {
+          text: 'TODO',
+          callback: () => console.log('TODO')
+        },
+        {
+          text: 'Quit',
+          callback: () => process.exit(0)
+        }
+      ],
+      autoCommandKeys: true,
+      keys: true,
+      height: 'shrink',
+      width: '100%',
+      border: {
+        type: 'line'
+      },
+      style: {
+        hover: {bg: 'green'}
+      }
+    })
   }
 
 }
