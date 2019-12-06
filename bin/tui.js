@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const Redis = require('redis');
 const IPFSDaemonFactory = require('ipfsd-ctl');
-const { Rhizome } = require('../index');
+const { Rhizome } = require('../src/index');
 const Tui = require('../tui/tui');
 
 (async () => {
@@ -14,9 +14,9 @@ const Tui = require('../tui/tui');
     start: true
   });
   const redisClient = Redis.createClient({
-    host: 'sprightly-redwood-7a63d23fa9.redisgreen.net',
+    host: 'hasty-aster-9378599e80.redisgreen.net',
     port: 11042,
-    password: 'a4f74e5842c24c8db40013fc20ab8200'
+    password: '683739877feb4c2ebeade9d9b39d7a51'
   })
   new Tui(await new Rhizome(ipfsDaemon.api, redisClient)).render();
 })();

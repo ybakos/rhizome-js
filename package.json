@@ -18,9 +18,13 @@
     "redis": "^2.8.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
     "jest": "^24.9.0"
   },
   "scripts": {
+    "build": "babel src -d dist",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",

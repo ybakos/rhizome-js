@@ -1,13 +1,21 @@
+const fs = require('fs');
+const os = require('os');
 const Redis = require('redis');
-const IPFSAPI = require('ipfs-http-client');
-const _ = require('lodash');
-const { Rhizome } = require('../index');
+const IPFSDaemonFactory = require('ipfsd-ctl');
+const { Rhizome } = require('../src/index');
 
-const localHostRunner = async () => {
-  const ipfs = await new IPFSAPI('127.0.0.1', 5001);
-  const redis = Redis.createClient({host: 'localhost'});
-  const PFM = await new Rhizome(ipfs, redis);
-  return PFM;
-}
-
-module.exports = localHostRunner;
+module.exports = async () => {
+  // Spawn a non-disposable (deterministic key generation from init
+  // file) daemon.
+  const ipfsDaemon = await IPFSDaemonFactory.create().spawn({
+    init: !fs.existsSync(`${os.homedir()}/.ipfs`),
+    disposable: false,
+    start: true
+  });
+  const redisClient = Redis.createClient({
+    host: 'hasty-aster-9378599e80.redisgreen.net',
+    port: 11042,
+    password: '683739877feb4c2ebeade9d9b39d7a51'
+  })
+  return await new Rhizome(ipfsDaemon.api, redisClient);
+};

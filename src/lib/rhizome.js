@@ -1,13 +1,21 @@
 const _ = require('lodash');
 const isIPFS = require('is-ipfs');
+const redis = require('redis')
 
 class Rhizome {
 
   constructor(ipfs, redis) {
     return new Promise((resolve, reject) => {
       this.ipfs = ipfs;
-      this.datastore = redis;
+      const redisClient = redis.createClient({
+        host: 'https://hasty-aster-9378599e80.redisgreen.net',
+        port: 11042,
+        password: '683739877feb4c2ebeade9d9b39d7a51'
+      });
+      console.log('ahhhh')
+      this.datastore = redisClient;
       ipfs.id((err, id) => {
+        console.log(id)
         this.publicKey = id.publicKey;
         resolve(this);
       })
