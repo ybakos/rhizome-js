@@ -4,16 +4,15 @@ import Chat from './Chat'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.rhizome = this.props.rhizome;
     this.state = {
       currentUsername: 'temporary',
-      currentId: this.rhizome.publicKey,
+      currentId: 'blah',
       currentScreen: 'chat'
     }
   }
 
   render() {
-    return <Chat currentId={this.state.currentId} rhizome={this.rhizome} />
+    return <Chat currentId={this.state.currentId}/>
   }
 }
 

@@ -11,7 +11,7 @@ class Chat extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(await this.props.rhizome.retrieveLinks());
+    // console.log(await this.props.rhizome.retrieveLinks());
     
   }
 
