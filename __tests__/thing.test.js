@@ -16,13 +16,27 @@ test('A Thing has a URI', () => {
 
 test('A Thing has a tags', () => {
   const thing = new Thing()
-  expect(thing).toHaveProperty('uri')
+  expect(thing).toHaveProperty('tags')
 })
 
-test('Tagging one Thing with another adds their URIs to both their tags lists', () => {
-  thing = new Thing('fake', 0, [])
-  other = new Thing('other fake', 1, [])
-  thing.tag(other)
-  expect(thing.tags).toContain(other.uri)
-  expect(other.tags).toContain(thing.uri)
+test('A Thing has targets', () => {
+  const thing = new Thing()
+  expect(thing).toHaveProperty('targets')
 })
+
+test("Tagging Thing A with Thing B adds B's uri to A's tag list, and A's uri to B's targets list", () => {
+  a = new Thing('A', 0, [])
+  b = new Thing('B', 1, [])
+  a.tag_with(b)
+  expect(a.tags).toContain(b.uri)
+  expect(b.targets).toContain(a.uri)
+})
+
+test("Telling Thing A to tag Thing B adds A's uri to B's tags list, and B's uri to A's targets list", () => {
+  a = new Thing('A', 0, [])
+  b = new Thing('B', 1, [])
+  a.tag(b)
+  expect(b.tags).toContain(a.uri)
+  expect(a.targets).toContain(b.uri)
+})
+
