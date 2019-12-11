@@ -12,7 +12,7 @@ test('The repertory represents a searchable catalog of information', () => {
 test('Registering a thing stores its information in the index', () => {
   const m = new Repertory({})
   m.register(fake_thing())
-  expect(m.index[fake_thing().information()]).toEqual(fake_thing().uri())
+  expect(m.index[fake_thing().information]).toEqual(fake_thing().uri)
 })
 
 test('Seeking the repertory with existing information returns a uri if found', () => {
@@ -21,5 +21,5 @@ test('Seeking the repertory with existing information returns a uri if found', (
 })
 
 function fake_thing() {
-  return { information: function() { return 'fake'} , uri: function() { return 0 } }
+  return { information: 'fake' , uri: 0 }
 }
