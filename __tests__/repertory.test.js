@@ -15,9 +15,9 @@ test('Registering a thing stores its information in the index', () => {
   expect(m.index[fake_thing().information()]).toEqual(fake_thing().uri())
 })
 
-test('Querying the repertory with existing information returns a uri', () => {
+test('Seeking the repertory with existing information returns a uri if found', () => {
   const m = new Repertory({'fake': 0})
-  expect(m.query('fake')).toEqual(0)
+  expect(m.seek('fake')).toEqual(0)
 })
 
 function fake_thing() {
